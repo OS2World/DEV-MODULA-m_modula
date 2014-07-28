@@ -1,0 +1,15 @@
+Jeff Stoners Modula 2 editing support for FTE-OS/2
+
+Program Contact:
+Jeff Stoner (jestoner+@pitt.edu)
+Upload Date: 	
+
+  1998-09-03
+Archive Date: 	
+
+  N/A
+
+Program Source:
+http://stoner.cidde.pitt.edu/Modula2/
+
+Requires: FTE Editor

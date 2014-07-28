@@ -1,0 +1,106 @@
+colorize MODULA {
+    SyntaxParser       = 'SIMPLE';
+
+    color {
+        { 'Normal',      '-7' },
+        { 'Number',      '-C' },
+#        { 'HexNumber',   '-D' },
+        { 'Punctuation', '-6' },
+        { 'String',      '-E' },
+        { 'Comment',     '-A' },
+#        { 'Command',     '-A' }, # assembler
+    };
+
+keyword '1' {
+   "abs",
+   "bitset", "boolean",
+   "cardinal", "card", "cap", "chr", "char", "complex", "cmplx",
+   "dec", "dispose",
+   "excl",
+   "false", "float",
+   "halt", "high",
+   "im", "inc", "incl", "int", "integer", "interruptible",
+   "length", "lfloat", "longcomplex", "longreal",
+   "max", "min",
+   "new", "nil",
+   "odd", "ord",
+   "proc", "protection",
+   "re", "real",
+   "size",
+   "true", "trunc",
+   "uninterruptible",
+   "val"
+};
+
+
+keyword '-' {
+   'and', 'array',
+   'begin', 'by',
+   'case', 'const',
+   'definition', 'div', 'do',
+   'else', 'elsif', 'end', 'exit', 'except', 'export',
+   'finally', 'for', 'forward', 'from',
+   'if', 'implementation', 'import', 'in',
+   'loop',
+   'mod', 'module',
+   'not',
+   'of', 'or',
+   'packedset', 'pointer', 'procedure',
+   'qualified',
+   'record', 'rem', 'retry', 'repeat', 'return',
+   'set',
+   'then', 'to', 'type',
+   'until',
+   'var',
+   'while', 'with'
+    };
+
+    h_state 0 { 'Normal' }
+    h_trans { 4, '-s', 'a-zA-Z_', 'Normal' }
+    h_trans { 1, '<', '(*', 'Comment' }
+    h_trans { 2, '<', '"', 'String' }
+    h_trans { 3, '<', '\'', 'String' }
+    h_trans { 5, '<s', '0-9', 'Number' }
+    h_trans { 0, 'S', '_a-zA-Z0-9', 'Punctuation' }
+
+    h_state 1 { 'Comment' }
+    h_trans { 0, '>', '*)', 'Comment' }
+
+    h_state 2 { 'String' }
+    h_trans { 0, '>', '"', 'String' }
+    h_trans { 0, '$', '', 'String' }
+
+    h_state 3 { 'String' }
+    h_trans { 0, '>', '\'', 'String' }
+    h_trans { 0, '$', '', 'String' }
+
+    h_state 4 { 'Normal' }
+    h_trans { 0, '$', '', 'Normal' }
+    h_wtype { 0, 0, 0, 'i', 'a-zA-Z0-9_' }
+
+    h_state 5 { 'Number' }
+    h_trans { 0, '-S', '0-9', 'Normal' }
+    h_trans { 0, '$', '', 'Normal' }
+
+
+}
+
+mode MODULA: PLAIN {      # Modula-2 Mode
+    FileNameRx          = /\.\c{{MOD}|{DEF}}$/;
+    HilitOn             = 1;
+    Colorizer           = 'MODULA';
+    AutoIndent          = 1;
+    IndentMode          = 'PLAIN';
+    TabSize             = 4;
+    SpaceTabs           = 1;
+    MatchCase           = 1;
+    Trim                = 1;
+    MultiLineHilit      = 1;
+    AutoHilitParen      = 1;
+
+    SaveFolds           = 2;      # save fold info at end of line
+    CommentStart        = ' (*';
+    CommentEnd          = '*)';
+
+#   RoutineRegexp       = '^{procedure}';
+}
