@@ -6,7 +6,7 @@ Modula 2 editing support for FTE-OS/2
 
 LICENSE
 ===============
-* GNU GPL V2
+* 
 
 COMPILE TOOLS
 ===============
@@ -14,8 +14,8 @@ COMPILE TOOLS
  
 AUTHORS
 ===============
-* 
+* Jeff Stoner
 
 LINKS
 ===============
-* 
+* http://stoner.cidde.pitt.edu/Modula/2
